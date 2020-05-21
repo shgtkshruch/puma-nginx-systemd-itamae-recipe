@@ -5,5 +5,7 @@ services:
     volumes:
       - ./terraform:/terraform
     working_dir: /terraform
+    env_file:
+      - .env
     tty: true
     stdin_open: true
