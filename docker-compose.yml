@@ -1,5 +1,13 @@
 version: '3.0'
 services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+      - bundle:/bundle
+    tty: true
+    stdin_open: true
+
   terraform:
     image: hashicorp/terraform:light
     volumes:
@@ -9,3 +17,6 @@ services:
       - .env
     tty: true
     stdin_open: true
+
+volumes:
+  bundle:
