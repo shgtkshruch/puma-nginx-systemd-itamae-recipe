@@ -1,0 +1,9 @@
+version: '3.0'
+services:
+  terraform:
+    image: hashicorp/terraform:light
+    volumes:
+      - ./terraform:/terraform
+    working_dir: /terraform
+    tty: true
+    stdin_open: true
