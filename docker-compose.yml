@@ -1,10 +1,17 @@
 version: '3.0'
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        RUBY_VERSION: '2.7-slim-buster'
+        NODE_MAJOR: '12'
+        YARN_VERSION: '1.21.0'
     volumes:
       - .:/app
       - bundle:/bundle
+      - node_modules:/app/node_modules
     tty: true
     stdin_open: true
 
@@ -20,3 +27,4 @@ services:
 
 volumes:
   bundle:
+  node_modules:
