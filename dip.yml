@@ -1,0 +1,7 @@
+
+version: '4.1'
+
+interaction:
+  terraform:
+    description: Run Terraform commands
+    service: terraform
