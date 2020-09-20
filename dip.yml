@@ -2,6 +2,20 @@
 version: '4.1'
 
 interaction:
+  bash:
+    description: Open the Bash shell in web's container
+    service: web
+    command: bash
+
+  bundle:
+    description: Run Bundler commands
+    service: web
+    command: bundle exec
+
   terraform:
     description: Run Terraform commands
     service: terraform
+
+provision:
+  - docker-compose down
+  - docker-comopse up -d
