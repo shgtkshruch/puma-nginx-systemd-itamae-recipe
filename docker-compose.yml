@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
       args:
-        RUBY_VERSION: '2.7-slim-buster'
+        RUBY_VERSION: '2.7-buster'
         NODE_MAJOR: '12'
         YARN_VERSION: '1.21.0'
     volumes:

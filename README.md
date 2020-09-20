@@ -5,6 +5,12 @@ Itamae recipe for configuring [Puma](https://puma.io/) and [Nginx](https://www.n
 - [dip](https://github.com/bibendi/dip)
 - [itamae](https://itamae.kitchen/)
 
+## Build Docker image
+
+```sh
+COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build
+```
+
 ## Build infra
 
 ```sh
