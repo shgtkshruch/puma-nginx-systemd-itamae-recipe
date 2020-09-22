@@ -22,7 +22,18 @@ dip terraform apply
 ## Provision
 
 ```sh
-itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/rails/default.rb 
+# All
+itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/bootstrap.rb
+
+# Nginx
+itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/nginx/default.rb
+
+# Rails
+itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/rails/default.rb
+```
+
+```sh
+cat "RAILS_MASTER_KEY=xxx" > /etc/environment
 ```
 
 ## Create Deploy key
