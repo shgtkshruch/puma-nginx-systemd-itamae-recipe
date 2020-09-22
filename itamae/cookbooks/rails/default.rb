@@ -68,12 +68,6 @@ execute 'set ruby version' do
   not_if "#{RBENV_INIT} rbenv global | grep #{RUBY_VERSION}"
 end
 
-execute 'install Bundler' do
-  command "#{RBENV_INIT} gem install bundler --no-ri --no-rdoc"
-  user node[:user]
-  not_if "#{RBENV_INIT} gem list | grep bundler"
-end
-
 execute 'install Node.js' do
   command 'curl --silent --location \
           https://rpm.nodesource.com/setup_14.x | bash -'
