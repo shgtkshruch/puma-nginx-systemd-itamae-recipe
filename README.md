@@ -22,6 +22,8 @@ dip terraform apply
 ## Provision
 
 ```sh
+export RAILS_MASTER_KEY=(cat config/master.key)
+
 # All
 itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/bootstrap.rb
 
@@ -32,14 +34,12 @@ itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/nginx/defau
 itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/rails/default.rb
 ```
 
-```sh
-cat "RAILS_MASTER_KEY=xxx" > /etc/environment
-```
-
 ## Create Deploy key
 
 ```sh
 ssh puma-nginx cat .ssh/authorized_keys
+
+export GITHUB_API_TOKEN=xxx
 
 curl \
   -X POST \
@@ -50,3 +50,12 @@ curl \
 ```
 
 ref: https://docs.github.com/en/rest/reference/repos#create-a-deploy-key
+
+## Deploy Rails
+
+```rb
+dip bash
+eval `ssh-agent`
+ssh-add puma-nginx-systemd.pem
+cap production deploy
+```
