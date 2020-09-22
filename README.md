@@ -57,5 +57,9 @@ ref: https://docs.github.com/en/rest/reference/repos#create-a-deploy-key
 dip bash
 eval `ssh-agent`
 ssh-add puma-nginx-systemd.pem
+cap production puma:config
+cap production puma:nginx_config
 cap production deploy
+
+cap production puma:restart
 ```
