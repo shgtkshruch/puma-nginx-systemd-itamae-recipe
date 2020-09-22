@@ -47,7 +47,7 @@ remote_file 'copy bash_profile' do
 end
 
 execute 'reload bash_profile' do
-  command %(source #{HOME}/.bash_profile)
+  command "source #{HOME}/.bash_profile"
 end
 
 git 'install ruby-build' do
