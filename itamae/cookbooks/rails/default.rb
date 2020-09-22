@@ -68,6 +68,18 @@ execute 'set ruby version' do
   not_if "#{RBENV_INIT} rbenv global | grep #{RUBY_VERSION}"
 end
 
+template "/etc/environment" do
+  action :create
+  source "environment.erb"
+  variables(rails_master_key: ENV['RAILS_MASTER_KEY'])
+end
+
+directory "/var/www/rails" do
+  action :create
+  owner node[:user]
+  group node[:user]
+end
+
 execute 'install Node.js' do
   command 'curl --silent --location \
           https://rpm.nodesource.com/setup_14.x | bash -'
