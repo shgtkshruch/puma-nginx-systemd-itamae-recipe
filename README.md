@@ -34,9 +34,6 @@ itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/nginx/defau
 
 # Rails
 itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/rails/default.rb
-
-# Puma
-itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/puma/default.rb
 ```
 
 ## Create Deploy key
@@ -68,6 +65,30 @@ cap production deploy
 
 # optional
 cap production puma:restart
+```
+
+## Puma
+
+register puma service to sytemd.
+
+```sh
+itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/puma/default.rb
+```
+
+```sh
+# reload systemd unit files
+sudo systemctl daemon-reload
+
+# auto start
+sudo systemctl enable puma
+
+# commands
+sudo systemctl start puma
+sudo systemctl stop puma
+sudo systemctl status -l puma
+
+# check sytemd logs
+$ journalctl -xe
 ```
 
 ## SELinux
