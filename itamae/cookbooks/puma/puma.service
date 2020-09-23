@@ -1,0 +1,19 @@
+[Unit]
+Description=Puma HTTP Server
+After=network.target
+
+[Service]
+Type=simple
+User=centos
+Group=centos
+
+Environment=RAILS_ENV=production
+EnvironmentFile=/etc/environment
+
+WorkingDirectory=/var/www/rails/current
+ExecStart=/home/centos/.rbenv/shims/bundle exec pumactl -F /var/www/rails/shared/puma.rb -S /var/www/rails/shared/tmp/pids/puma.state start
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

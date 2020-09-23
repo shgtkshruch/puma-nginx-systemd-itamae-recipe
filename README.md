@@ -34,6 +34,9 @@ itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/nginx/defau
 
 # Rails
 itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/rails/default.rb
+
+# Puma
+itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/puma/default.rb
 ```
 
 ## Create Deploy key
