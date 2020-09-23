@@ -12,6 +12,13 @@ interaction:
     service: web
     command: bundle exec
 
+  rails:
+    description: Run Rails server at http://localhost:3000
+    service: web
+    command: bundle exec rails s -b 0.0.0.0
+    compose:
+      run_options: [service-ports, use-aliases]
+
   terraform:
     description: Run Terraform commands
     service: terraform
