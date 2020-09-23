@@ -14,3 +14,12 @@ end
 directory "/etc/nginx/sites-enabled" do
   action :create
 end
+
+remote_file 'copy nginx.pp' do
+  source 'nginx.pp'
+  path "."
+end
+
+execute "apply policy" do
+  command "semodule -i nginx.pp"
+end

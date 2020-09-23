@@ -66,3 +66,22 @@ cap production deploy
 # optional
 cap production puma:restart
 ```
+
+## SELinux
+
+1. raise SELinux error
+2. generate policy file
+
+```sh
+$ sudo grep nginx /var/log/audit/audit.log | audit2allow -m nginx
+$ sudo checkmodule -M -m -o nginx.mod nginx.te
+$ sudo semodule_package -o nginx.pp -m nginx.mod
+```
+
+3. apply policy
+
+```sh
+$ sudo semodule -i nginx.pp
+```
+
+ref: https://nts.strzibny.name/allowing-nginx-to-use-a-pumaunicorn-unix-socket-with-selinux/
