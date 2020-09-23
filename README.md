@@ -19,6 +19,8 @@ dip terraform plan
 dip terraform apply
 ```
 
+Save SSH private key to your machine.
+
 ## Provision
 
 ```sh
@@ -37,8 +39,7 @@ itamae ssh -h puma-nginx -y itamae/nodes/centos.yml itamae/cookbooks/rails/defau
 ## Create Deploy key
 
 ```sh
-ssh puma-nginx cat .ssh/authorized_keys
-
+export EC2_PUB_KEY=(ssh puma-nginx cat .ssh/authorized_keys)
 export GITHUB_API_TOKEN=xxx
 
 curl \
@@ -46,7 +47,7 @@ curl \
   -H "Accept: application/vnd.github.v3+json" \
   -H "Authorization: token $GITHUB_API_TOKEN" \
   https://api.github.com/repos/shgtkshruch/puma-nginx-systemd-itamae-recipe/keys \
-  -d '{ "title": "EC2_PUB_KEY", "key": "XXX", "read_only": "true" }'
+  -d '{ "title": "EC2_PUB_KEY", "key": " '"$EC2_PUB_KEY"' ", "read_only": "true" }'
 ```
 
 ref: https://docs.github.com/en/rest/reference/repos#create-a-deploy-key
@@ -55,11 +56,13 @@ ref: https://docs.github.com/en/rest/reference/repos#create-a-deploy-key
 
 ```rb
 dip bash
+
 eval `ssh-agent`
 ssh-add puma-nginx-systemd.pem
-cap production puma:config
+
 cap production puma:nginx_config
 cap production deploy
 
+# optional
 cap production puma:restart
 ```
