@@ -1,6 +1,6 @@
 # http://nginx.org/en/linux_packages.html#RHEL-CentOS
 
-remote_file 'copy bash_profile' do
+remote_file 'copy nginx.repo' do
   source 'nginx.repo'
   path "/etc/yum.repos.d/nginx.repo"
 end
